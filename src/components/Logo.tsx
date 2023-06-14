@@ -3,11 +3,9 @@ import React from "react";
 
 const Logo: React.FC = () => {
   return (
-    <div className="flex space-x-2 items-center">
+    <div className="flex items-center space-x-2">
       {/* <img className="w-10 h-10" src={logo} alt="logo" /> */}
-      <h2 className="text-3xl font-bold text-gray-100 italic">
-        Vite Learning Project
-      </h2>
+      <h2 className="text-3xl font-bold italic text-gray-100">Login System</h2>
     </div>
   );
 };

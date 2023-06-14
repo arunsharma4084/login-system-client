@@ -24,7 +24,6 @@ const SignUp: React.FC = () => {
     setError(validateData(signUpData));
 
     if (!error) {
-      console.log(error);
       try {
         const response = await clientAPI.post("/users", signUpData);
         console.log(response);
@@ -48,7 +47,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="mx-auto mt-10 w-[350px] max-w-xl rounded-xl border border-slate-900 p-6 selection:bg-rose-500 selection:text-white">
-      <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
+      <h2 className="mb-8 text-center text-3xl font-bold text-gray-900">
         Sign Up
       </h2>
 
@@ -114,7 +113,7 @@ const SignUp: React.FC = () => {
       <div className="flex flex-col items-center justify-center">
         <p className="mt-4">
           Already have an account?
-          <span className="ml-1 rounded-md px-1 pb-1 text-lg italic leading-none text-violet-700 underline">
+          <span className="ml-1 px-1 pb-1 text-lg italic leading-none text-violet-700 underline">
             <Link to="/login">Login</Link>
           </span>
         </p>
