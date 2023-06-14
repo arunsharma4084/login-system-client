@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .styled-input {
+    @apply h-8 w-full rounded-md border-2 border-gray-300 p-2 text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none;
+  }
+
+  .styled-label {
+    @apply pointer-events-none absolute -top-6 left-0 px-[10px] text-sm leading-none transition-all peer-placeholder-shown:top-0 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-gray-700;
+  }
+}
