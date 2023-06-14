@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Input from "../components/Input";
 
 const LogIn: React.FC = () => {
   const [logInData, setLogInData] = useState({
@@ -10,44 +11,72 @@ const LogIn: React.FC = () => {
   const [error, seterror] = useState('')
   const navigate = useNavigate()
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLogInData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
     navigate('/users/me', {replace: true})
   }
 
   return (
-    <div id="login-form" onSubmit={onFormSubmit}>
-      <div>
-        <h2>Log In</h2>
-        <div>
-          <label>Email</label>
-          <input 
-            type="email" 
-            name="email"
-            placeholder="Email" 
-            value={logInData.email}
-            onChange={(e) => setLogInData((prev) => ({...prev, email: e.target.value}))}
-            required />
+    <div className="mx-auto mt-10 w-[350px] max-w-xl rounded-xl border border-slate-900 p-6 selection:bg-rose-500 selection:text-white">
+      <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
+        Log In
+      </h2>
+
+      <form
+        action=""
+        id="signup-form"
+        onSubmit={onFormSubmit}
+        className="space-y-7"
+      >
+        <div className="text-rose-600">{error}</div>
+
+        <Input
+          type="email"
+          name="email"
+          autoFocus={false}
+          value={logInData.email}
+          placeholder="Email"
+          required={true}
+          handleChange={handleInputChange}
+        ></Input>
+
+        <Input
+          type="password"
+          name="password"
+          autoFocus={false}
+          value={logInData.password}
+          placeholder="Password"
+          required={true}
+          handleChange={handleInputChange}
+        ></Input>
+
+        <Link to={'/forgot-password'}><p className="mt-1 text-violet-500 italic underline leading-none">Forgot Password?</p></Link>
+
+        <div className="flex flex-col items-center justify-center">
+          <button
+            form="signup-form"
+            type="submit"
+            className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white"
+          >
+            Login
+          </button>
         </div>
+      </form>
 
-        <div>
-          <label>Password</label>
-          <input 
-            type="password"
-            placeholder="Password" 
-            name="password"
-            value={logInData.password}
-            onChange={(e) => setLogInData((prev) => ({...prev, password: e.target.value}))}
-            required />
-        </div>
-
-        <Link to={'/forgot-password'}><p>Forgot Password?</p></Link>
-
-        <button form="login-form" type="submit" disabled>
-          Log In
-        </button>
-
-        <p>Have not registered yet? Sign Up.</p>
+      <div className="flex flex-col items-center justify-center">
+        <p className="mt-4">
+          Do not have an account yet?
+          <span className="ml-1 rounded-md px-1 pb-1 text-lg italic leading-none text-violet-700 underline">
+            <Link to="/signup">Sign Up</Link>
+          </span>
+        </p>
       </div>
     </div>
   );
