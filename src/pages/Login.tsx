@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
+import { clientAPI } from "../api/api";
 
 const LogIn: React.FC = () => {
   const [logInData, setLogInData] = useState({
@@ -8,7 +9,8 @@ const LogIn: React.FC = () => {
     password: "",
   });
 
-  const [error, seterror] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,9 +20,19 @@ const LogIn: React.FC = () => {
     }));
   };
 
-  function onFormSubmit(event: React.FormEvent) {
+  async function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    navigate("/users/me", { replace: true });
+    setLoading(true)
+
+    try {
+      const response = await clientAPI.post('/users/login', logInData)
+      console.log(response)
+      setLoading(false)
+      navigate("/users/me", { replace: true });
+    } catch(e){
+      setError("Invalid Credentials. Could not log in.")
+      setLoading(false)
+    }
   }
 
   return (
@@ -67,7 +79,8 @@ const LogIn: React.FC = () => {
           <button
             form="login-form"
             type="submit"
-            className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white"
+            disabled={loading}
+            className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white disabled:opacity-50"
           >
             Login
           </button>

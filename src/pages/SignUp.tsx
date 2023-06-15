@@ -21,12 +21,16 @@ const SignUp: React.FC = () => {
     event.preventDefault();
 
     setError("");
+    setLoading(true)
     setError(validateData(signUpData));
 
     if (!error) {
       try {
+        console.log(signUpData)
         const response = await clientAPI.post("/users", signUpData);
         console.log(response);
+        setLoading(false)
+        navigate('/login', {replace: true})
       } catch (e: any) {
         console.log("Error: ", e);
         if (e.response.data.code === 11000) {
@@ -34,6 +38,7 @@ const SignUp: React.FC = () => {
         } else {
           setError("Could not create account. Please try again");
         }
+        setLoading(true)
       }
     }
   }
@@ -103,6 +108,7 @@ const SignUp: React.FC = () => {
           <button
             form="signup-form"
             type="submit"
+            disabled={loading}
             className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white"
           >
             Sign Up

@@ -1,7 +1,6 @@
 import validator from "validator"
 
 export const validateData = (data: any) : string => {
-    console.log(data.password.length)
     if(!validator.isEmail(data.email)){
       return "Please enter a valid e-mail address."
     }
