@@ -1,28 +1,20 @@
-import React, { useContext } from "react";
-import logo from "../assets/images/vite.svg";
-import coverImage from "../../public/images/background.jpg";
+import React, { useEffect } from "react";
+import useAuthToken from "../utils/useAuthToken";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-  // const first = useContext(AuthContext);
+  const {authToken} = useAuthToken()
+  const navigate = useNavigate()
 
-  // if (first?.currentUser) {
-  //   return <Navigate to="/dashboard" replace={true} />;
-  // } else {
-    return (
-      <div>
-        <div>
-          <div>
-            <img src={logo} alt="logo" />
-            <h2>Taskify</h2>
-          </div>
-          <div>
-            <button>Sign Up</button>
-            <button>Log In</button>
-          </div>
-        </div>
-      </div>
-    );
-  // }
-};
+  useEffect(() => {
+    if(!authToken){
+      navigate('/login', {replace: true})
+    }
+  }, [])
+
+  return (
+    <h2>Login System App</h2>
+  )
+}
 
 export default LandingPage;

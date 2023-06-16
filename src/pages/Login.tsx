@@ -3,7 +3,11 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import { clientAPI } from "../api/api";
 
-const LogIn: React.FC = () => {
+interface loginProps {
+  setAuthToken: (token: string) => void
+}
+
+const LogIn: React.FC<loginProps> = ({setAuthToken}) => {
   const [logInData, setLogInData] = useState({
     email: "",
     password: "",
@@ -26,7 +30,8 @@ const LogIn: React.FC = () => {
 
     try {
       const response = await clientAPI.post('/users/login', logInData)
-      console.log(response)
+      console.log(response.data.token)
+      setAuthToken(response.data.token)
       setLoading(false)
       navigate("/users/me", { replace: true });
     } catch(e){
