@@ -6,14 +6,6 @@ const Header: React.FC = () => {
     <div className="h-fit bg-rose-400 py-6 px-5">
       <div className="flex items-center justify-between">
         <Logo />
-        {/* <button
-          className="py-2 px-3 text-lg bg-teal-300 rounded border self-center"
-          onClick={() => {
-            console.log("Log Out");
-          }}
-        >
-          Log Out
-        </button> */}
         <div className="flex items-center space-x-2">
           <img
             src="/empty-avatar.png"

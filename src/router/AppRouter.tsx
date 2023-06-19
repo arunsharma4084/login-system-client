@@ -5,7 +5,6 @@ import ErrorPage from '../pages/ErrorPage';
 import SignUp from '../pages/SignUp';
 import LogIn from '../pages/Login';
 import ForgotPassword from '../pages/ForgotPassword';
-import LandingPage from '../pages/LandingPage';
 import UserDashboard from '../pages/UserDashboard';
 import useAuthToken from '../utils/useAuthToken';
 
@@ -13,25 +12,12 @@ const AppRouter = () => {
     const {authToken, setAuthToken} = useAuthToken()
     console.log(authToken)
 
-    // if(!authToken){
-    //     return (
-    //         <BrowserRouter>
-    //             <Routes>
-    //                 <Route path="/" element={<LandingPage />} />
-    //                 <Route path="/signup" element={<SignUp />} />
-    //                 <Route path="/login" element={<LogIn setAuthToken={setAuthToken} />} />
-    //                 <Route path="/forgot-password" element={<ForgotPassword />} />
-    //             </Routes>   
-    //         </BrowserRouter>
-    //     )
-    // }
-
     return (
         <BrowserRouter>
             <GoogleOAuthProvider clientId={'228572820036-9e3q0sgffsrh0ccgfrvq9uec9io8jdig.apps.googleusercontent.com'}>
                 <Routes>
                     <Route path="/users/me" element={authToken ? <UserDashboard /> : <Navigate replace to={'/login'}/>} />
-                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/" element={authToken ? <UserDashboard /> : <Navigate replace to={'/login'}/>} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<LogIn setAuthToken={setAuthToken} />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
