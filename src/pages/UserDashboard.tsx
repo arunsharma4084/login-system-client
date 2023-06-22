@@ -24,7 +24,8 @@ const UserDashboard: React.FC = () => {
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
       <Header />
       <div className="grid place-content-center bg-rose-100 p-10">
-        Welcome to this login-system web app!
+        <h3>Welcome to this login-system web app!</h3>
+
         <Menu />
       </div>
       <Footer />

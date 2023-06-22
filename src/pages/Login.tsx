@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import { clientAPI } from "../api/api";
+import { useAuthContext } from "../context/AuthContext";
 
-interface loginProps {
-  setAuthToken: (token: string) => void
-}
+// interface loginProps {
+//   setAuthToken: (token: string) => void
+// }
 
-const LogIn: React.FC<loginProps> = ({setAuthToken}) => {
+const LogIn: React.FC = () => {
   const [logInData, setLogInData] = useState({
     email: "",
     password: "",
   });
+
+  const auth = useAuthContext()
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false)
@@ -31,7 +34,7 @@ const LogIn: React.FC<loginProps> = ({setAuthToken}) => {
     try {
       const response = await clientAPI.post('/users/login', logInData)
       console.log(response.data.token)
-      setAuthToken(response.data.token)
+      auth?.setAuthentication(response.data.token)
       setLoading(false)
       navigate("/users/me", { replace: true });
     } catch(e){

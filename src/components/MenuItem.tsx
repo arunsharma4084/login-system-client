@@ -7,8 +7,8 @@ interface menuItemProps {
 
 const MenuItem: React.FC<menuItemProps> = ({ title, path }) => {
   return (
-    <li className="p-2 border border-gray-500">
-      <a href={path}>{title}</a>
+    <li>
+      <a href={path} className="block px-4 py-2 hover:bg-gray-100">{title}</a>
     </li>
   );
 };

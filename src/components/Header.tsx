@@ -7,15 +7,8 @@ const Header: React.FC = () => {
       <div className="flex items-center justify-between">
         <Logo />
         <div className="flex items-center space-x-2">
-          <img
-            src="/empty-avatar.png"
-            alt="user avatar"
-            width={50}
-            height={50}
-            sizes="50"
-            className="border border-black bg-teal-500 rounded-full"
-          />
-          <span className="h-0 w-0 border-x-8 border-t-8 border-x-transparent border-t-teal-500"></span>
+          <button>Sign Up</button>
+          <button>Login</button>
         </div>
       </div>
     </div>

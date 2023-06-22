@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./pages/UserDashboard";
 import "./index.css";
 import AppRouter from "./router/AppRouter";
+import AuthProvider from "./context/AuthContext";
+import App from "./app";
 
 const root: ReactDOM.Root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -10,6 +11,6 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AppRouter />
+    <App />
   </React.StrictMode>
 );

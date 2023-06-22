@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useAuthToken from "../utils/useAuthToken";
+import useAuthToken from "../hooks/useAuthToken";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
