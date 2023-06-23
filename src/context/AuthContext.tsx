@@ -16,11 +16,14 @@ const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
     const checkAuthentication = async () => {
         const tokenString = localStorage.getItem('token');
         if(!tokenString){
-            return setIsAuthorised(false)
+            setIsAuthorised(false)
+            setLoading(false)
+            return
         }
         const authToken = JSON.parse(tokenString)
         const user = await clientAPI.get('/users/me', {headers: {Authorization: `Bearer ${authToken}`}})
         if(user) {
+            console.log(user)
             setIsAuthorised(true)
             setLoading(false)
         }

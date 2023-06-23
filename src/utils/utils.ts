@@ -5,7 +5,7 @@ export const validateData = (data: any) : string => {
       return "Please enter a valid e-mail address."
     }
 
-    if(!data.name){
+    if(!data.username){
       return "Name of user is required."
     }
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { clientAPI } from "../api/api";
 import { useNavigate, Link } from "react-router-dom";
 import { validateData } from "../utils/utils";
 import Input from "../components/Input";
+import { useUserContext } from "../context/UserContext";
 
 const SignUp: React.FC = () => {
   const [signUpData, setSignUpData] = useState({
@@ -12,35 +12,30 @@ const SignUp: React.FC = () => {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const value = useUserContext()
+  const [state, setState] = useState({error: value?.user.error, loading: value?.user.loading});
+  console.log(value)
 
   const navigate = useNavigate();
 
   async function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
+    // setState({error: "", loading: true});
+    setState({error: validateData(signUpData), loading: true});
 
-    setError("");
-    setLoading(true)
-    setError(validateData(signUpData));
+    if (!state.error) {
+      value?.signUp(signUpData)
+      if(value?.user.error){
+        console.log(value.user.error)
+        setState({error: value.user.error, loading: value.user.loading})
+      }
 
-    if (!error) {
-      try {
-        console.log(signUpData)
-        const response = await clientAPI.post("/users", signUpData);
-        console.log(response);
-        setLoading(false)
+      if(value?.user.user && Object.keys(value?.user.user).length !== 0){
+        setState((prev) => ({...prev, loading: false}))
         navigate('/login', {replace: true})
-      } catch (e: any) {
-        console.log("Error: ", e);
-        if (e.response.data.code === 11000) {
-          setError("User with this email already exists.");
-        } else {
-          setError("Could not create account. Please try again");
-        }
-        setLoading(true)
       }
     }
+    setState((prev) => ({...prev, loading: false}))
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +57,7 @@ const SignUp: React.FC = () => {
         onSubmit={onFormSubmit}
         className="space-y-7"
       >
-        <div className="text-rose-600">{error}</div>
+        <div className="text-rose-600">{state.error}</div>
 
         <Input
           type="text"
@@ -108,7 +103,7 @@ const SignUp: React.FC = () => {
           <button
             form="signup-form"
             type="submit"
-            disabled={loading}
+            disabled={state.loading}
             className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white"
           >
             Sign Up

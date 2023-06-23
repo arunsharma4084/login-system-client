@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import AppRouter from "./router/AppRouter";
-import AuthProvider from "./context/AuthContext";
 import App from "./app";
 
 const root: ReactDOM.Root = ReactDOM.createRoot(
@@ -10,7 +8,7 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>
+//  </React.StrictMode>
 );
