@@ -1,19 +1,16 @@
 import React, { useEffect } from "react";
-import useAuthToken from "../hooks/useAuthToken";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
-  const {authToken} = useAuthToken()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if(!authToken){
-      navigate('/login', {replace: true})
-    }
-  }, [])
 
   return (
-    <h2>Login System App</h2>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+      <Header />
+      <h2>Login System App</h2>
+      <Footer />
+    </div>
   )
 }
 

@@ -3,7 +3,8 @@ import { clientAPI } from "../api/api";
 
 interface AuthContextType {
     isAuthorised: boolean,
-    setAuthentication: (authToken: string) => void
+    setAuthentication: (authToken: string) => void,
+    authToken: string
 }
 
 interface ProviderProps {
@@ -20,16 +21,18 @@ const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
             setLoading(false)
             return
         }
-        const authToken = JSON.parse(tokenString)
-        const user = await clientAPI.get('/users/me', {headers: {Authorization: `Bearer ${authToken}`}})
+        const token = JSON.parse(tokenString)
+        const user = await clientAPI.get('/users/me', {headers: {Authorization: `Bearer ${token}`}})
         if(user) {
             console.log(user)
             setIsAuthorised(true)
             setLoading(false)
         }
+        return token
     }
     
     const [isAuthorised, setIsAuthorised] = useState(false);
+    const [authToken, setAuthToken] = useState("")
     const [loading, setLoading] = useState(true);
 
     const setAuthentication = (authToken: string) => {
@@ -40,9 +43,10 @@ const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
 
     useEffect(() => {
         checkAuthentication()
+            .then((data) => setAuthToken(data))
     }, [isAuthorised]);
 
-    const value = { isAuthorised, setAuthentication };
+    const value = { isAuthorised, setAuthentication, authToken };
 
     return (
         <AuthContext.Provider value={value}>

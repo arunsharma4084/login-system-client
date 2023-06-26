@@ -8,6 +8,7 @@ import ForgotPassword from '../pages/ForgotPassword';
 import UserDashboard from '../pages/UserDashboard';
 import { useAuthContext } from '../context/AuthContext';
 import UserProvider from '../context/UserContext';
+import LandingPage from '../pages/LandingPage';
 
 const AppRouter = () => {
     const auth = useAuthContext()
@@ -19,7 +20,7 @@ const AppRouter = () => {
             <GoogleOAuthProvider clientId={'228572820036-9e3q0sgffsrh0ccgfrvq9uec9io8jdig.apps.googleusercontent.com'}>
                 <UserProvider>
                     <Routes>
-                        <Route path="/" element={auth?.isAuthorised ? <Navigate replace to={'/users/me'}/> : <Navigate replace to={'/login'}/>} />
+                        <Route path="/" element={auth?.isAuthorised ? <Navigate replace to={'/users/me'}/> : <LandingPage />} />
                         <Route path="/users/me" element={auth?.isAuthorised ? <UserDashboard /> : <Navigate replace to={'/login'}/>} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/login" element={<LogIn />} />

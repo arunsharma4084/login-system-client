@@ -3,10 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import { clientAPI } from "../api/api";
 import { useAuthContext } from "../context/AuthContext";
-
-// interface loginProps {
-//   setAuthToken: (token: string) => void
-// }
+import { useUserContext } from "../context/UserContext";
 
 const LogIn: React.FC = () => {
   const [logInData, setLogInData] = useState({
@@ -15,9 +12,8 @@ const LogIn: React.FC = () => {
   });
 
   const auth = useAuthContext()
-
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false)
+  const userContextValue = useUserContext()
+  const [state, setState] = useState({error: "", loading: false});
   const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,18 +25,15 @@ const LogIn: React.FC = () => {
 
   async function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setLoading(true)
+    setState({error: "", loading: true})
 
-    try {
-      const response = await clientAPI.post('/users/login', logInData)
-      console.log(response.data.token)
-      auth?.setAuthentication(response.data.token)
-      setLoading(false)
-      navigate("/users/me", { replace: true });
-    } catch(e){
-      setError("Invalid Credentials. Could not log in.")
-      setLoading(false)
-    }
+    userContextValue?.login(logInData)
+      .then((data) => {
+        auth?.setAuthentication(data)
+        navigate('/users/me', {replace: true})
+      }).catch((e) => {
+        setState({error: e, loading: false})
+      })
   }
 
   return (
@@ -55,7 +48,7 @@ const LogIn: React.FC = () => {
         onSubmit={onFormSubmit}
         className="space-y-7"
       >
-        <div className="text-rose-600">{error}</div>
+        <div className="text-rose-600">{state.error}</div>
 
         <Input
           type="email"
@@ -87,7 +80,7 @@ const LogIn: React.FC = () => {
           <button
             form="login-form"
             type="submit"
-            disabled={loading}
+            disabled={state.loading}
             className="rounded-lg bg-rose-500 px-3 pt-2 pb-3 text-center text-xl font-semibold leading-none text-white disabled:opacity-50"
           >
             Login

@@ -1,30 +1,33 @@
-import React, { useEffect } from "react";
-import Header from "../components/Header";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Menu from "../components/Menu";
-
-interface user {
-  username: string;
-  email: string;
-  token: string;
-  avatar: typeof Buffer | null;
-  createdAt: Date;
-  updatedAt: Date;
-  _id: string;
-  __v: Number;
-}
+import { useUserContext } from "../context/UserContext";
+import AuthHeader from "../components/AuthHeader";
+import { useAuthContext } from "../context/AuthContext";
+import { User } from "../types/types";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard: React.FC = () => {
+  const [user, setUser] = useState({} as User)
+  const auth = useAuthContext()
+  const userContextValue = useUserContext()
+  const navigate = useNavigate();
+  console.log(user)
+  console.log(auth)
 
   useEffect(() => {
-
+    userContextValue?.getUserProfile(auth?.authToken)
+      .then((res) => setUser(res))
+      // .catch(() => {
+      //   navigate('/login', {replace: true})
+      // })
   }, [])
-
+  
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
-      <Header />
-      <div className="grid place-content-center bg-rose-100 p-10">
-        <h3>Welcome to this login-system web app!</h3>
+      <AuthHeader />
+      <div className="grid place-content-center p-10 bg-sky-200">
+        <h3>Welcome to this login-system web app! {user?.username}</h3>
 
         <Menu />
       </div>

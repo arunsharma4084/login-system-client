@@ -14,6 +14,11 @@ export type SignUpFormData = {
     password: string
 }
 
+export type LogInFormData = {
+    email: string,
+    password: string
+}
+
 export enum Actions {
     ADD = "ADD_USER",
     LOGIN = "LOGIN_USER",
@@ -23,16 +28,13 @@ export enum Actions {
     DELETE_AVATAR = "DELETE_AVATAR",
     LOGOUT = "LOGOUT_USER",
     LOGOUT_ALL = "LOGOUT_ALL_USERS",
-    LOADING = "LOADING", 
-    FAILURE = "FAILURE"
+    // LOADING = "LOADING", 
+    // FAILURE = "FAILURE"
 }
 
 export type UserAction = {
     type: Actions,
-    payload?: {
-        user?: User
-        error?: string 
-    }
+    payload?: User
 }
 
 export type UserState = {

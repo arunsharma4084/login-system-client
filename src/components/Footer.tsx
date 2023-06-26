@@ -5,7 +5,7 @@ import Copyright from "./Copyright";
 
 const Footer: React.FC = () => {
   return (
-    <div className="h-fit bg-slate-900 px-2 py-4 text-white">
+    <div className="h-fit bg-slate-800 px-2 py-4 text-white">
       <div className="flex justify-center mb-4">
         <p>Designed and Developed by :</p>
         <span>Arun Sharma, Frontend Developer</span>

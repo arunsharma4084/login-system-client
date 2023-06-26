@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 const AuthHeader: React.FC = () => {
   return (
-    <div className="h-fit bg-rose-400 py-6 px-5">
+    <div className="h-fit bg-gray-900 py-6 px-5">
       <div className="flex items-center justify-between">
         <Logo />
         <div className="flex items-center space-x-2">
@@ -13,7 +13,7 @@ const AuthHeader: React.FC = () => {
             width={50}
             height={50}
             sizes="50"
-            className="border border-black bg-teal-500 rounded-full"
+            className="border border-white bg-teal-500 rounded-full"
           />
           <span className="h-0 w-0 border-x-8 border-t-8 border-x-transparent border-t-teal-500"></span>
         </div>

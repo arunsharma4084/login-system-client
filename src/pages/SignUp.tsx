@@ -12,30 +12,26 @@ const SignUp: React.FC = () => {
     confirmPassword: "",
   });
 
-  const value = useUserContext()
-  const [state, setState] = useState({error: value?.user.error, loading: value?.user.loading});
-  console.log(value)
-
+  const userContextValue = useUserContext()
+  const [state, setState] = useState({error: "", loading: false});
   const navigate = useNavigate();
 
   async function onFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    // setState({error: "", loading: true});
-    setState({error: validateData(signUpData), loading: true});
+    setState({error: "", loading: true})
 
-    if (!state.error) {
-      value?.signUp(signUpData)
-      if(value?.user.error){
-        console.log(value.user.error)
-        setState({error: value.user.error, loading: value.user.loading})
-      }
-
-      if(value?.user.user && Object.keys(value?.user.user).length !== 0){
-        setState((prev) => ({...prev, loading: false}))
-        navigate('/login', {replace: true})
-      }
+    const validationError = validateData(signUpData)
+    if(validationError){
+      setState({error: validationError, loading: false})
+    } else {
+      userContextValue?.signUp(signUpData)
+        .then((data) => {
+          alert(data)
+          navigate('/login', {replace: true})
+        }).catch((e) => {
+          setState({error: e, loading: false})
+        })
     }
-    setState((prev) => ({...prev, loading: false}))
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
