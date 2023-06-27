@@ -12,7 +12,7 @@ const Header: React.FC = () => {
             <Link to="/signup">SignUp</Link>
           </button>
           <button className="ml-1 px-1 pb-1 text-xl italic leading-none text-white">
-            <Link to="/signup">Login</Link>
+            <Link to="/login">Login</Link>
           </button>
         </div>
       </div>
