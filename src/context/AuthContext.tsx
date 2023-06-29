@@ -4,6 +4,7 @@ import { clientAPI } from "../api/api";
 interface AuthContextType {
     isAuthorised: boolean,
     setAuthentication: (authToken: string) => void,
+    removeAuthentication: () => void
     authToken: string
 }
 
@@ -41,12 +42,18 @@ const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
         setLoading(false)
     }
 
+    const removeAuthentication = () => {
+        localStorage.clear()
+        setIsAuthorised(false)
+        setLoading(false)
+    }
+
     useEffect(() => {
         checkAuthentication()
             .then((data) => setAuthToken(data))
     }, [isAuthorised]);
 
-    const value = { isAuthorised, setAuthentication, authToken };
+    const value = { isAuthorised, setAuthentication, authToken, removeAuthentication };
 
     return (
         <AuthContext.Provider value={value}>

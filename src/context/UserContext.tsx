@@ -8,7 +8,8 @@ type UserContextType = {
     user: User,
     signUp: (signUpFormData: SignUpFormData) => Promise<string>,
     login: (logInData: LogInFormData) => Promise<string>,
-    getUserProfile: (authToken: string | undefined) => Promise<User>
+    getUserProfile: (authToken: string) => Promise<User>,
+    logout: (authToken: string) => Promise<void>
 }
 
 interface ProviderProps {
@@ -46,13 +47,22 @@ const UserProvider: React.FC<ProviderProps> = ({ children }) => {
                 throw("Invalid Credentials. Could not log in.")
             }
         },
-        getUserProfile: async (authToken: string | undefined) => {
+        getUserProfile: async (authToken: string) => {
             try {
                 const response = await clientAPI.get('/users/me', {headers: {"Authorization": `Bearer ${authToken}`}})
                 console.log(response.data)
                 return response.data
             } catch(e) {
-                throw e
+                throw ("Could not get user profile")
+            }
+        },
+        logout: async(authToken: string) => {
+            try {
+                await clientAPI.post('/users/logout', {headers: {"Authorization": `Bearer ${authToken}`}})
+                localStorage.clear()
+            } catch(e) {
+                console.log(e)
+                throw('Could not log out.')
             }
         }
      };

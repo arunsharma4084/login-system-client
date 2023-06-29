@@ -5,27 +5,27 @@ import { useUserContext } from "../context/UserContext";
 import AuthHeader from "../components/AuthHeader";
 import { useAuthContext } from "../context/AuthContext";
 import { User } from "../types/types";
-import { useNavigate } from "react-router-dom";
 
 const UserDashboard: React.FC = () => {
-  const [user, setUser] = useState({} as User)
+  const [user, setUser] = useState({} as User | undefined)
   const auth = useAuthContext()
-  const [authToken, setAuthToken] = useState(auth?.authToken)
   const userContextValue = useUserContext()
-  const navigate = useNavigate();
-  console.log(user)
-  console.log(auth)
+
+  const getUser = async () => {
+    const authToken = auth?.authToken
+    if(authToken){
+      const response = await userContextValue?.getUserProfile(authToken)
+      return response
+    } else{
+      throw ("Could not get user info")
+    }
+  }
 
   useEffect(() => {
-    console.log("sdhgjuhg")
-    setAuthToken(auth?.authToken)
-    authToken && userContextValue?.getUserProfile(authToken)
-      .then((res) => setUser(res))
-      .catch((e) => {
-        // navigate('/login', {replace: true})
-        console.log("Error: ", e)
-      })
-  }, [authToken])
+    getUser()
+      .then((data) => setUser(data))
+      .catch((e) => console.log(e))
+  }, [auth])
   
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
