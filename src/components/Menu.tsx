@@ -2,9 +2,12 @@ import React from "react";
 import { menuItems } from "../utils/menuItems";
 import MenuItem from "./MenuItem";
 
-const Menu: React.FC = () => {
+type menuProps = {
+  isOpen: boolean;
+}
+const Menu: React.FC<menuProps> = ({isOpen}) => {
   return (
-    <div className="mt-4 selection:bg-rose-500 selection:text-white">
+    <div className={`mt-4 absolute after:content-'' after:absolute after:w-6 after:h-6 after:rotate-45 after:top-0 after:right-0 after:bg-white right-5 top-16 selection:bg-rose-500 selection:text-white ${isOpen? "hidden" : ""}`}>
       <div className="border bg-gray-50 w-fit rounded-xl border-gray-700">
         <div className="border-b-black flex flex-col items-center p-2 pt-4 border space-y-2 rounded-t-xl">
           <img
@@ -19,7 +22,7 @@ const Menu: React.FC = () => {
         </div>
         {menuItems.map((section, index) => {
           return (
-            <ul className={`px-3 py-1 pr-8 border-b-black ${index === 0 ? "border" : ""}`}>
+            <ul key={index} className={`px-3 py-1 pr-8 border-b-black ${index === 0 ? "border" : ""}`}>
               {section.map((item) => {
                 return <MenuItem key={item.id} {...item} />
               })}

@@ -7,15 +7,16 @@ import { useAuthContext } from "../context/AuthContext";
 interface menuItemProps {
   title: string;
   path: string;
-  icon: IconType
+  icon: IconType,
+  id: number
 }
 
-const MenuItem: React.FC<menuItemProps> = ({ title, path, icon }) => {
+const MenuItem: React.FC<menuItemProps> = ({ id, title, path, icon }) => {
   const Icon = icon
   const navigate = useNavigate()
 
   return (
-    <li className="flex space-x-2 items-center bg-gray-50">
+    <li key={id} className="flex space-x-2 items-center bg-gray-50">
       <Icon size={25}/>
       <div 
         className="py-2 text-lg"

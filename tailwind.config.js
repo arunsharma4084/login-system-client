@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        tilt: "tilt 10s infinite linear"
+        tilt: "tilt 10s infinite ease-in-out"
       },
 
       keyframes: {

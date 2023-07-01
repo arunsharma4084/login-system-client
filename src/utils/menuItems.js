@@ -24,7 +24,7 @@ export const menuItems = [
   ],
   [
     {
-      id: 3,
+      id: 4,
       title: "Logout",
       path: "/landingPage",
       icon: MdLogout
