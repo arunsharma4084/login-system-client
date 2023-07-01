@@ -15,7 +15,7 @@ const MenuItem: React.FC<menuItemProps> = ({ id, title, path, icon }) => {
   const navigate = useNavigate()
 
   return (
-    <li key={id} className="flex items-center bg-gray-50 justify-between cursor-pointer" onClick={() => navigate(path)}>
+    <li tabIndex={0} key={id} className="flex items-center bg-gray-50 px-3 py-1 rounded-xl hover:bg-gray-100 justify-between cursor-pointer" onClick={() => navigate(path)}>
       <div className="space-x-2 flex items-center pr-4">
       <Icon size={25}/>
       <div 

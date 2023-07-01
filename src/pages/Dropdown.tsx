@@ -7,7 +7,6 @@ const Dropdown: React.FC = () => {
   
 
   const handleEscapeKey = (e: any) => {
-    console.log(e.key)
     if(e.key === 'Escape') setIsOpen(false)
   }
 
@@ -20,29 +19,28 @@ const Dropdown: React.FC = () => {
 
   const useOutsideAlerter = (ref: React.RefObject<HTMLDivElement>) => {
     useEffect(() => {
-   
       // Function for click event
       const handleOutsideClick = (event: any) => {
         if (ref.current && !ref.current.contains(event.target)) {
-          console.log("you just clicked outside of box!");
-          console.log(isOpen)
           setIsOpen(false)
         }
       }
    
       // Adding click event listener
-      document.addEventListener("click", handleOutsideClick);
+      isOpen && document.addEventListener("click", handleOutsideClick);
       return () => document.removeEventListener("click", handleOutsideClick);
-    }, [ref]);
+    }, [ref, isOpen]);
   }
 
   useOutsideAlerter(dropdownRef)
 
   return (
-    <div ref={dropdownRef}>
+    <div ref={dropdownRef} tabIndex={0}>
       <button 
         className="flex items-center space-x-2 relative"
-        onClick={() => setIsOpen(!isOpen)}>
+        onClick={() => {
+          setIsOpen(!isOpen)
+        }}>
           <img
             src="/empty-avatar.png"
             alt="user avatar"
@@ -51,8 +49,8 @@ const Dropdown: React.FC = () => {
             sizes="50"
             className="border border-white bg-teal-500 rounded-full align-middle"
           />
-          <span className={`h-0 w-0 border-x-8 border-t-8 border-x-transparent border-t-teal-500 ${isOpen ? "hidden" : ""}`}></span>
-          <span className={`h-0 w-0 border-x-8 border-b-8 border-x-transparent border-b-teal-500 ${!isOpen ? "hidden" : ""}`}></span>
+          <span tabIndex={0} className={`h-0 w-0 border-x-8 border-t-8 border-x-transparent border-t-teal-500 ${isOpen ? "hidden" : ""}`}></span>
+          <span tabIndex={0} className={`h-0 w-0 border-x-8 border-b-8 border-x-transparent border-b-teal-500 ${!isOpen ? "hidden" : ""}`}></span>
       </button>
       <Menu isOpen={isOpen}/>
     </div>
