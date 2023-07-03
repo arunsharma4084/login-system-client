@@ -1,8 +1,7 @@
 import React from "react";
 import { IconType } from "react-icons";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../context/UserContext";
-import { useAuthContext } from "../context/AuthContext";
 
 interface menuItemProps {
   title: string;
@@ -16,12 +15,15 @@ const MenuItem: React.FC<menuItemProps> = ({ id, title, path, icon }) => {
   const navigate = useNavigate()
 
   return (
-    <li key={id} className="flex space-x-2 items-center bg-gray-50">
+    <li key={id} className="flex items-center bg-gray-50 justify-between cursor-pointer" onClick={() => navigate(path)}>
+      <div className="space-x-2 flex items-center pr-4">
       <Icon size={25}/>
       <div 
-        className="py-2 text-lg"
-        onClick={() => navigate(path)}
+        className="py-4 text-lg leading-none"
       >{title}</div>
+
+      </div>
+      <MdKeyboardArrowRight size={25}/>
     </li>
   );
 };

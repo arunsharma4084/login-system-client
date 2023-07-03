@@ -7,19 +7,19 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        tilt: "tilt 10s infinite ease-in-out"
+        convert: "tilt 3s ease-in-out"
       },
 
       keyframes: {
-        tilt: {
-          "0%, 50%, 100%": {
-            transform: "rotate(0deg)",
+        convert: {
+          "0%": {
+            opacity: 0,
           },
-          "25%": {
-            transform: "rotate(-1eg)",
+          "50%": {
+            opacity: 0.5,
           },
-          "75%": {
-            transform: "rotate(1deg)",
+          "100%": {
+            opacity: 1,
           }
         }
       }
