@@ -13,7 +13,7 @@ const Menu: React.FC<menuProps> = ({isOpen}) => {
       <div className="border bg-gray-50 w-fit rounded-xl border-gray-700">
         <div className="border-b-black flex flex-col items-center p-2 py-4 border space-y-2 rounded-t-xl relative">
           <img
-            src="/empty-avatar.png"
+            src="/images/empty-avatar.png"
             alt="user avatar"
             width={150}
             height={150}

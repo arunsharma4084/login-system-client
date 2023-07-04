@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
-import { clientAPI } from "../api/api";
 import { useAuthContext } from "../context/AuthContext";
 import { useUserContext } from "../context/UserContext";
 
-const LogIn: React.FC = () => {
+const LogInForm: React.FC = () => {
   const [logInData, setLogInData] = useState({
     email: "",
     password: "",
@@ -30,7 +29,7 @@ const LogIn: React.FC = () => {
     userContextValue?.login(logInData)
       .then((data) => {
         auth?.setAuthentication(data)
-        navigate('/home', {replace: true})
+        navigate('/users/me', {replace: true})
       }).catch((e) => {
         setState({error: e, loading: false})
       })
@@ -100,4 +99,4 @@ const LogIn: React.FC = () => {
   );
 };
 
-export default LogIn;
+export default LogInForm;

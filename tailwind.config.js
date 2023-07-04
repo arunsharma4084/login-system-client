@@ -9,7 +9,6 @@ module.exports = {
       animation: {
         convert: "tilt 3s ease-in-out"
       },
-
       keyframes: {
         convert: {
           "0%": {
@@ -22,6 +21,9 @@ module.exports = {
             opacity: 1,
           }
         }
+      },
+      colors: {
+        "gray-background": "#f0f2f5"
       }
     },
   },

@@ -42,7 +42,7 @@ const Dropdown: React.FC = () => {
           setIsOpen(!isOpen)
         }}>
           <img
-            src="/empty-avatar.png"
+            src="/images/empty-avatar.png"
             alt="user avatar"
             width={50}
             height={50}

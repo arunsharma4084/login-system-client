@@ -9,6 +9,9 @@ import UserDashboard from '../pages/UserDashboard';
 import { useAuthContext } from '../context/AuthContext';
 import UserProvider from '../context/UserContext';
 import LandingPage from '../pages/LandingPage';
+import ProfilePage from '../pages/ProfilePage';
+import UpdateProfile from '../pages/UpdateProfile';
+import Settings from '../pages/Settings';
 
 const AppRouter = () => {
     const auth = useAuthContext()
@@ -20,11 +23,14 @@ const AppRouter = () => {
             <GoogleOAuthProvider clientId={'228572820036-9e3q0sgffsrh0ccgfrvq9uec9io8jdig.apps.googleusercontent.com'}>
                 <UserProvider>
                     <Routes>
-                        <Route path="/" element={auth?.isAuthorised ? <Navigate replace to={'/users/me'}/> : <LandingPage />} />
-                        <Route path="/users/me" element={auth?.isAuthorised ? <UserDashboard /> : <Navigate replace to={'/login'}/>} />
+                        <Route path="/" element={auth?.isAuthorised ? <Navigate replace to={'/home'}/> : <LandingPage />} />
+                        <Route path="/home" element={auth?.isAuthorised ? <UserDashboard /> : <Navigate replace to={'/'}/>} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/login" element={<LogIn />} />
                         <Route path="/forgot-password" element={<ForgotPassword />} />
+                        <Route path="/user/me" element={auth?.isAuthorised ? <ProfilePage /> : <Navigate replace to={'/'}/>} />
+                        <Route path="/user/update-profile" element={auth?.isAuthorised ? <UpdateProfile /> : <Navigate replace to={'/'}/>} />
+                        <Route path="/user/settings" element={auth?.isAuthorised ? <Settings /> : <Navigate replace to={'/'}/>} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
                 </UserProvider>

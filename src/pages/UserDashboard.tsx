@@ -30,7 +30,7 @@ const UserDashboard: React.FC = () => {
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
       <AuthHeader />
-      <div className="grid place-content-center p-10 bg-sky-200">
+      <div className="grid place-content-center p-10 bg-gray-background">
         <h3>Welcome to this login-system web app! {user?.username}</h3>
         {/* <Menu /> */}
       </div>
