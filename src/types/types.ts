@@ -42,3 +42,8 @@ export type UserState = {
     error: string | undefined
     loading: boolean
 }
+
+export type authProps = {
+    user: User | undefined,
+    authToken: string | undefined
+}

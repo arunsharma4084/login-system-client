@@ -10,9 +10,9 @@ const UserDashboard: React.FC = () => {
   const [user, setUser] = useState({} as User | undefined)
   const auth = useAuthContext()
   const userContextValue = useUserContext()
+  const authToken = auth?.authToken
 
   const getUser = async () => {
-    const authToken = auth?.authToken
     if(authToken){
       const response = await userContextValue?.getUserProfile(authToken)
       return response
@@ -27,12 +27,12 @@ const UserDashboard: React.FC = () => {
       .catch((e) => console.log(e))
   }, [auth])
   
+  console.log(user)
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
-      <AuthHeader />
+      <AuthHeader user={user} authToken={authToken} />
       <div className="grid place-content-center p-10 bg-gray-background">
         <h3>Welcome to this login-system web app! {user?.username}</h3>
-        {/* <Menu /> */}
       </div>
       <Footer />
     </div>

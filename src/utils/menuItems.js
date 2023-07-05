@@ -5,19 +5,19 @@ export const menuItems = [
     {
       id: 1,
       title: "Your Profile",
-      path: "/user/me",
+      path: "/users/me",
       icon: MdPerson
     },
     {
       id: 2,
       title: "Update Profile",
-      path: "/user/update-profile",
+      path: "/users/me/update-profile",
       icon: MdPersonAddAlt1
     },
     {
       id: 3,
       title: "Settings",
-      path: "/user/settings",
+      path: "/users/me/settings",
       icon: MdSettings
     },
 
@@ -26,7 +26,7 @@ export const menuItems = [
     {
       id: 4,
       title: "Logout",
-      path: "/landingPage",
+      path: "/users/logout",
       icon: MdLogout
     },
   ]
