@@ -8,17 +8,30 @@ const ProfilePage = () => {
   console.log(location.state)
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-gray-background">
       <AuthHeader user={location.state.user} authToken={location.state.authToken}/>
-      <div className="p-8 grid grid-cols-2 gap-4 space-y-8 items-center bg-gray-background border border-gray-500">
-        <p>Profile Picture</p>
-        <img src="" alt="" />
-        <p>Name</p>
-        <p>{location.state.user.username}</p>
-        <p>Email</p>
-        <p>{location.state.user.email}</p>
+      <div className="flex flex-col items-center">
+        <h1 className="font-bold text-3xl my-8 mx-auto w-100">Your Profile</h1>
+        <div className="mx-8 grid grid-cols-[250px_minmax(300px,_1fr)] auto-rows-max place-center w-fit justify-self-center items-center border bg-gray-background shadow-lg rounded-xl">
+          <div className="grid place-content-center border border-transparent h-full text-center border-r-gray-300 border-b-gray-300">
+            <p className="text-2xl h-full text-center">Profile Picture</p>
+          </div>
+          <div className="p-8 border border-b-gray-300 grid place-content-center">
+            <img 
+              src={location.state.user?.avatar ? `data:image/jpeg;base64,${location.state.user?.avatar}` : "/images/empty-avatar.png"}
+              alt="user avatar"
+              width={200}
+              height={200}
+              tabIndex={0}
+              className="rounded-full border border-gray-500 object-contain object-center"
+            />
+          </div>
+            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Name</p>
+            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">{location.state.user.username}</p>
+            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Email</p>
+            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">{location.state.user.email}</p>
+        </div>
       </div>
-
       <Footer />
     </div>
   )

@@ -29,7 +29,7 @@ const UserDashboard: React.FC = () => {
   
   console.log(user)
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-gray-background">
       <AuthHeader user={user} authToken={authToken} />
       <div className="grid place-content-center p-10 bg-gray-background">
         <h3>Welcome to this login-system web app! {user?.username}</h3>
