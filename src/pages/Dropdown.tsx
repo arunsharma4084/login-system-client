@@ -36,7 +36,7 @@ const Dropdown = (props: authProps) => {
   useOutsideAlerter(dropdownRef)
 
   return (
-    <div ref={dropdownRef} tabIndex={0}>
+    <div ref={dropdownRef} tabIndex={0} className="z-50 isolate">
       <button 
         className="flex items-center space-x-2 relative"
         onClick={() => {

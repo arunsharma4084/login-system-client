@@ -11,8 +11,8 @@ type menuProps = {
 }
 const Menu: React.FC<menuProps> = ({isOpen, user, authToken}) => {
   return (
-    <div tabIndex={0} className={`mt-4 absolute after:content-'' after:absolute after:w-4 after:h-4 after:rotate-45 after:-top-2 after:right-8 after:bg-white after:border-transparent after:border-t-black after:border-l-black after:border 
-    right-5 top-18 selection:bg-rose-500 selection:text-white ${!isOpen? "hidden" : ""}`}>
+    <div tabIndex={0} className={`mt-4 absolute after:content-'' after:absolute after:w-4 after:h-4 after:rotate-45 after:-top-2 after:right-8 after:bg-white after:border-transparent after:border-t-black after:border-l-black after:border right-5 top-18 z-50 selection:bg-rose-500 selection:text-white 
+    ${!isOpen? "hidden" : ""}`}>
       <div className="border bg-gray-50 w-fit rounded-xl border-gray-700">
         <div className="border-b-black flex flex-col items-center p-2 py-4 border space-y-2 rounded-t-xl relative">
           <img

@@ -17,27 +17,27 @@ const UpdateProfile = () => {
           <div className="grid place-content-center border border-transparent h-full text-center border-r-gray-300 border-b-gray-300">
             <p className="text-2xl h-full text-center">Profile Picture</p>
           </div>
-          <div className="p-8 border border-b-gray-300 grid place-content-center relative">
+          <div className="p-8 border border-transparent border-b-gray-300 grid place-content-center relative -z-0">
             <img 
               src={location.state.user?.avatar ? `data:image/jpeg;base64,${location.state.user?.avatar}` : "/images/empty-avatar.png"}
               alt="user avatar"
               width={200}
               height={200}
               tabIndex={0}
-              className="rounded-full border border-gray-500 object-contain object-center"
+              className="rounded-full border border-gray-500 object-contain object-center -z-0"
             />
-            <div className="flex items-center space-x-1 bg-white border border-gray-400 absolute bottom-10 right-10 p-1 rounded">
+            <div className="flex items-center space-x-1 bg-white border border-gray-400 absolute bottom-10 right-10 p-1 rounded -z-0">
               <MdEdit size={20} />
             <p className="leading-none">Edit</p>
           </div>
           </div>
             <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Name</p>
-            <div className="flex space-x-2 p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full">
-              <p className=" text-center">{location.state.user.username}</p>
-              <a href="">{"(Change)"}</a>
+            <div className="flex p-8 border border-transparent border-b-gray-300 h-full justify-center space-x-2 items-center">
+              <p className=" text-center text-2xl leading-none">{location.state.user.username}</p>
+              <a href="" className="text-center text-indigo-800 leading-none mt-1">{"(change)"}</a>
             </div>
-            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Email</p>
-            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">{location.state.user.email}</p>
+            <p className="p-8 border border-transparent border-r-gray-300 text-2xl h-full text-center">Email</p>
+            <p className="p-8 text-2xl h-full text-center">{location.state.user.email}</p>
         </div>
       </div>
       <Footer />

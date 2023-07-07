@@ -16,7 +16,7 @@ const ProfilePage = () => {
           <div className="grid place-content-center border border-transparent h-full text-center border-r-gray-300 border-b-gray-300">
             <p className="text-2xl h-full text-center">Profile Picture</p>
           </div>
-          <div className="p-8 border border-b-gray-300 grid place-content-center">
+          <div className="p-8 border border-transparent border-b-gray-300 grid place-content-center">
             <img 
               src={location.state.user?.avatar ? `data:image/jpeg;base64,${location.state.user?.avatar}` : "/images/empty-avatar.png"}
               alt="user avatar"
@@ -27,9 +27,9 @@ const ProfilePage = () => {
             />
           </div>
             <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Name</p>
-            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">{location.state.user.username}</p>
-            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Email</p>
-            <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">{location.state.user.email}</p>
+            <p className="p-8 border border-transparent border-b-gray-300 text-2xl h-full text-center">{location.state.user.username}</p>
+            <p className="p-8 border border-transparent border-r-gray-300 text-2xl h-full text-center">Email</p>
+            <p className="p-8 text-2xl h-full text-center">{location.state.user.email}</p>
         </div>
       </div>
       <Footer />

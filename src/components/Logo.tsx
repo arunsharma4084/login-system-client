@@ -1,10 +1,12 @@
 import React from "react";
 import { MdManageAccounts } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 // import logo from "../assets/vite.svg";
 
 const Logo: React.FC = () => {
+  const navigate = useNavigate()
   return (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center space-x-3" onClick={() => navigate('/home')}>
       {/* <img className="w-10 h-10" src={logo} alt="logo" /> */}
       {/* <MdManageAccounts size={50}/> */}
       <img src="/images/login-system-logo.png" alt="logo for this web app"  width={50} height={50} />

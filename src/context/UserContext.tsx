@@ -10,6 +10,7 @@ type UserContextType = {
     login: (logInData: LogInFormData) => Promise<string>,
     getUserProfile: (authToken: string) => Promise<User>,
     logout: (authToken: string) => Promise<void>
+    logoutAll: () => Promise<void>
 }
 
 interface ProviderProps {
@@ -57,11 +58,23 @@ const UserProvider: React.FC<ProviderProps> = ({ children }) => {
             }
         },
         logout: async(authToken: string) => {
+            console.log(authToken)
             try {
-                await clientAPI.post('/users/logout', {headers: {"Authorization": `Bearer ${authToken}`}})
+                const response = await clientAPI.post('/users/logout', {headers: {"Authorization": `Bearer ${authToken}`}})
+                console.log(response)
+                // localStorage.removeItem('token')
+            } catch(e) {
+                console.log("error :", e)
+                throw('Could not log out.')
+            }
+        }, 
+        logoutAll: async() => {
+            try {
+                const response = await clientAPI.post('/users/logoutAll')
+                console.log(response)
                 localStorage.clear()
             } catch(e) {
-                console.log(e)
+                console.log("error :", e)
                 throw('Could not log out.')
             }
         }
