@@ -60,7 +60,7 @@ const UserProvider: React.FC<ProviderProps> = ({ children }) => {
         logout: async(authToken: string) => {
             console.log(authToken)
             try {
-                const response = await clientAPI.post('/users/logout', {headers: {"Authorization": `Bearer ${authToken}`}})
+                const response = await clientAPI.post('/users/logout', null, {headers: {"Authorization": `Bearer ${authToken}`}})
                 console.log(response)
                 // localStorage.removeItem('token')
             } catch(e) {

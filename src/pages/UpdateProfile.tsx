@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import AuthHeader from "../components/AuthHeader";
 import { useLocation } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
+import AvatarUpdateModal from "../components/AvatarUpdateModal";
 
 const UpdateProfile = () => {
   const location = useLocation()
   console.log(location.state)
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-gray-background">
@@ -26,10 +28,14 @@ const UpdateProfile = () => {
               tabIndex={0}
               className="rounded-full border border-gray-500 object-contain object-center -z-0"
             />
-            <div className="flex items-center space-x-1 bg-white border border-gray-400 absolute bottom-10 right-10 p-1 rounded -z-0">
+            <div 
+              className="flex items-center space-x-1 bg-white border border-gray-400 absolute bottom-10 right-10 p-1 rounded -z-0"
+              onClick={() => setShowModal(true)}
+            >
               <MdEdit size={20} />
             <p className="leading-none">Edit</p>
           </div>
+          <AvatarUpdateModal showModal={showModal} setShowModal={setShowModal} />
           </div>
             <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Name</p>
             <div className="flex p-8 border border-transparent border-b-gray-300 h-full justify-center space-x-2 items-center">
