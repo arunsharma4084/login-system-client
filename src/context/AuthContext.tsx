@@ -43,7 +43,7 @@ const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
     }
 
     const removeAuthentication = () => {
-        localStorage.clear()
+        localStorage.removeItem('token')
         setIsAuthorised(false)
         setLoading(false)
     }

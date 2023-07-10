@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AuthHeader from "../components/AuthHeader";
 import Logo from "../components/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const LogOut = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const userContextValue = useUserContext()
+  const auth = useAuthContext()
   const [error, setError] = useState("")
 
   const logOutHandler = async () => {
     userContextValue?.logout(location.state.authToken)
     .then(() => {
+      auth?.removeAuthentication()
       navigate('/', {replace: true})
     }).catch((e) => {
       setError(e)
@@ -22,8 +23,9 @@ const LogOut = () => {
   }
 
   const logOutAllHandler = async () => {
-    userContextValue?.logoutAll()
+    userContextValue?.logoutAll(location.state.authToken)
     .then(() => {
+      auth?.removeAuthentication()
       navigate('/', {replace: true})
     }).catch((e) => {
       setError(e)
