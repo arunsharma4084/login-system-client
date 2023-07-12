@@ -10,7 +10,8 @@ type UserContextType = {
     login: (logInData: LogInFormData) => Promise<string>,
     getUserProfile: (authToken: string) => Promise<User>,
     logout: (authToken: string) => Promise<void>
-    logoutAll: (authToken: string) => Promise<void>
+    logoutAll: (authToken: string) => Promise<void>,
+    updateAvatar: (authToken: string, formData: FormData) => Promise<void>
 }
 
 interface ProviderProps {
@@ -69,6 +70,15 @@ const UserProvider: React.FC<ProviderProps> = ({ children }) => {
                 await clientAPI.post('/users/logoutAll', null, {headers: {"Authorization": `Bearer ${authToken}`}})
             } catch(e) {
                 throw('Could not log out.')
+            }
+        },
+        updateAvatar: async(authToken: string, formData: FormData) => {
+            console.log(authToken, formData)
+            try {
+                await clientAPI.post('/users/me/avatar', formData, {headers: {"Authorization": `Bearer ${authToken}`}})
+                console.log("avatar updated")
+            } catch(e) {
+                throw('Could not upload your avatar.')
             }
         }
      };
