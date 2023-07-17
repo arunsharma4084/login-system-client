@@ -4,11 +4,13 @@ import AuthHeader from "../components/AuthHeader";
 import { useLocation } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
 import AvatarUpdateModal from "../components/AvatarUpdateModal";
+import ProfileUpdateModal from "../components/ProfileUpdateModal";
 
 const UpdateProfile = () => {
   const location = useLocation()
   console.log(location.state)
   const [showModal, setShowModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-gray-background relative">
@@ -39,7 +41,10 @@ const UpdateProfile = () => {
             <p className="p-8 border border-transparent border-r-gray-300 border-b-gray-300 text-2xl h-full text-center">Name</p>
             <div className="flex p-8 border border-transparent border-b-gray-300 h-full justify-center space-x-2 items-center">
               <p className=" text-center text-2xl leading-none">{location.state.user.username}</p>
-              <a href="" className="text-center text-indigo-800 leading-none mt-1">{"(change)"}</a>
+              <button 
+                className="text-center text-indigo-800 leading-none mt-1"
+                onClick={() => setShowProfileModal(true)}
+              >{"(change)"}</button>
             </div>
             <p className="p-8 border border-transparent border-r-gray-300 text-2xl h-full text-center">Email</p>
             <p className="p-8 text-2xl h-full text-center">{location.state.user.email}</p>
@@ -49,6 +54,11 @@ const UpdateProfile = () => {
       <AvatarUpdateModal 
         showModal={showModal} 
         setShowModal={setShowModal} 
+      />
+      <ProfileUpdateModal 
+        showModal={showProfileModal} 
+        setShowModal={setShowProfileModal} 
+        user={location.state.user}
       />
     </div>
   )

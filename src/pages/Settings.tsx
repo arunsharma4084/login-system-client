@@ -1,20 +1,65 @@
-import React from "react";
-import Header from "../components/Header";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import AuthHeader from "../components/AuthHeader";
+import { MdEdit } from "react-icons/md";
+import AvatarUpdateModal from "../components/AvatarUpdateModal";
+import ProfileUpdateModal from "../components/ProfileUpdateModal";
 
 const Settings = () => {
   const location = useLocation()
-  console.log(location.state)
+  const [showModal, setShowModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen bg-gray-background">
       <AuthHeader user={location.state.user} authToken={location.state.authToken}/>
-      <div className="">
-        Your Settings
+      <div className="flex flex-col items-center">
+        <h1 className="font-bold text-3xl my-8 mx-auto w-100">Your Settings</h1>
+        <div className="relative -z-0">
+          <img 
+            src={location.state.user?.avatar ? `data:image/jpeg;base64,${location.state.user?.avatar}` : "/images/empty-avatar.png"}
+            alt="user avatar"
+            width={225}
+            height={225}
+            tabIndex={0}
+            className="rounded-full border border-gray-500 object-contain object-center -z-0"
+          />
+          <button 
+            className="flex items-center space-x-1 bg-white border border-gray-400 absolute bottom-4 right-2 p-1 rounded -z-0"
+            onClick={() => setShowModal(true)}
+          >
+            <MdEdit size={20} />
+            <p className="leading-none">Edit</p>
+          </button>
+        </div>
+
+        <div className="border border-gray-400 my-8 rounded-xl flex flex-col">
+          <div className="p-6 border border-transparent flex space-x-2 justify-center items-center border-b-gray-400">
+            <p className="text-2xl">Name :  {location.state.user.username}</p>
+            <button 
+              className="text-center text-indigo-800 leading-none mt-1"
+              onClick={() => setShowProfileModal(true)}
+            >{"(change)"}</button>
+          </div>
+          <div className="p-6 border flex space-x-2 justify-center items-center border-b-gray-400">
+            <p className="text-2xl">Email :  {location.state.user.email}</p>
+          </div>
+          <button className="p-6 border border-b-gray-400 text-2xl border-transparent w-full">Reset Password</button>
+          <button className="p-6 border border-b-gray-400 text-2xl border-transparent w-full">Log Out</button>
+          <button className="p-6 text-2xl border-transparent w-full">Log Out from All Devices</button>
+        </div>
       </div>
       <Footer />
+      <AvatarUpdateModal 
+        showModal={showModal} 
+        setShowModal={setShowModal} 
+      />
+      <ProfileUpdateModal 
+        showModal={showProfileModal} 
+        setShowModal={setShowProfileModal} 
+        user={location.state.user}
+      />
     </div>
   )
 }

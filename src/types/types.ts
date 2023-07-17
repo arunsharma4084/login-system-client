@@ -14,6 +14,10 @@ export type SignUpFormData = {
     password: string
 }
 
+export type UpdateData = {
+    username: string,
+}
+
 export type LogInFormData = {
     email: string,
     password: string

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { clientAPI } from "../api/api";
-import { User, SignUpFormData, LogInFormData} from "../types/types"
+import { User, SignUpFormData, LogInFormData, UpdateData} from "../types/types"
 import { useAuthContext } from "./AuthContext";
 // import userReducer from "../reducers/userReducer";
 
@@ -11,7 +11,8 @@ type UserContextType = {
     getUserProfile: (authToken: string) => Promise<User>,
     logout: (authToken: string) => Promise<void>
     logoutAll: (authToken: string) => Promise<void>,
-    updateAvatar: (authToken: string, formData: FormData) => Promise<void>
+    updateAvatar: (authToken: string, formData: FormData) => Promise<void>,
+    updateProfile: (authToken: string, updateData: UpdateData) => Promise<void>
 }
 
 interface ProviderProps {
@@ -73,12 +74,19 @@ const UserProvider: React.FC<ProviderProps> = ({ children }) => {
             }
         },
         updateAvatar: async(authToken: string, formData: FormData) => {
-            console.log(authToken, formData)
             try {
                 await clientAPI.post('/users/me/avatar', formData, {headers: {"Authorization": `Bearer ${authToken}`}})
-                console.log("avatar updated")
             } catch(e) {
                 throw('Could not upload your avatar.')
+            }
+        },
+        updateProfile: async(authToken: string, updateData: UpdateData) => {
+            console.log(authToken, updateData)
+            try {
+                await clientAPI.patch('/users/me', updateData, {headers: {"Authorization": `Bearer ${authToken}`}})
+                console.log("profile updated")
+            } catch(e) {
+                throw('Could not update your profile.')
             }
         }
      };
