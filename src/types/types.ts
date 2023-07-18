@@ -15,7 +15,8 @@ export type SignUpFormData = {
 }
 
 export type UpdateData = {
-    username: string,
+    username?: string,
+    password?: string
 }
 
 export type LogInFormData = {

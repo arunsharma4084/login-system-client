@@ -13,6 +13,7 @@ import ProfilePage from '../pages/ProfilePage';
 import UpdateProfile from '../pages/UpdateProfile';
 import Settings from '../pages/Settings';
 import LogOut from '../pages/LogOut';
+import ResetPassword from '../pages/ResetPassword';
 
 const AppRouter = () => {
     const auth = useAuthContext()
@@ -32,7 +33,8 @@ const AppRouter = () => {
                         <Route path="/users/me" element={auth?.isAuthorised ? <ProfilePage /> : <Navigate replace to={'/'}/>} />
                         <Route path="/users/me/update-profile" element={auth?.isAuthorised ? <UpdateProfile /> : <Navigate replace to={'/'}/>} />
                         <Route path="/users/me/settings" element={auth?.isAuthorised ? <Settings /> : <Navigate replace to={'/'}/>} />
-                        <Route path="/users/logout" element={auth?.isAuthorised ? <LogOut /> : <Navigate replace to={'/'}/>} />
+                        <Route path="/users/me/logout" element={auth?.isAuthorised ? <LogOut /> : <Navigate replace to={'/'}/>} />
+                        <Route path="/users/me/reset-password" element={auth?.isAuthorised ? <ResetPassword /> : <Navigate replace to={'/'}/>} />
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>
                 </UserProvider>

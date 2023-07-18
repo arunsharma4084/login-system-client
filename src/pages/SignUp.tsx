@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { validateData } from "../utils/utils";
+import { validateSignUpData } from "../utils/utils";
 import Input from "../components/Input";
 import { useUserContext } from "../context/UserContext";
 
@@ -20,7 +20,7 @@ const SignUp: React.FC = () => {
     event.preventDefault();
     setState({error: "", loading: true})
 
-    const validationError = validateData(signUpData)
+    const validationError = validateSignUpData(signUpData)
     if(validationError){
       setState({error: validationError, loading: false})
     } else {
